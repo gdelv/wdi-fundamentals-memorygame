@@ -23,29 +23,38 @@ var cards = [
 ];
 var cardsInPlay = [];
 
+function createBoard () {
+    for (var i = 0; i < cards.length; i++) {
+        var cardElement = document.createElement('img');
+        cardElement.setAttribute('src', 'images/back.png');
+        cardElement.setAttribute('data-id', i);
+        cardElement.addEventListener('click', flipCard);
+        document.getElementById('game-board').appendChild(cardElement);
+        
+}
+};
+
+//function checkForMatch 
 function checkForMatch () {
     if (cardsInPlay[0] === cardsInPlay[1]) {
-        console.log("You found a match!");
+        alert("You found a match!");
       } else {
-        console.log("Sorry, try again.");
+        alert("Sorry, try again.");
       }
 };
 
-//cardId is a number (0-3)
-function flipCard (cardId) {
+
+function flipCard () {
+    
+    var cardId = this.getAttribute('data-id'); 
+    this.setAttribute('src', cards[cardId].cardImage);
+
     console.log(cards[cardId].cardImage);
     console.log("User flipped " + cards[cardId].rank);
     console.log("The suit is "+ cards[cardId].suit);
     cardsInPlay.push(cards[cardId].rank);
     return checkForMatch();
+    
+};
 
-
-
-if (cardsInPlay.length === 2) {
-    if (cardOne === cardTwo) {
-        alert("You found a match!")
-    } else { 
-    alert("Sorry, try again")
-    }
-}    
-}
+createBoard();
